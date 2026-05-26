@@ -1,0 +1,45 @@
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.status-submitted {
+  background: #f3f2f1;
+  color: #605e5c;
+}
+
+.status-approved {
+  background: #e7f0f7;
+  color: var(--primary-color);
+}
+
+.status-in-progress {
+  background: #fff4ce;
+  color: #986f0b;
+}
+
+.status-ordered {
+  background: #f3e7f5;
+  color: #6f2d7f;
+}
+
+.status-delivered {
+  background: #e1f5e1;
+  color: var(--success-color);
+}
+
+.status-denied {
+  background: #fde7e9;
+  color: var(--error-color);
+}
+
+.status-unknown {
+  background: var(--secondary-color);
+  color: var(--text-secondary);
+}

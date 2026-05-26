@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "appId": "82519634-df1b-4a73-b6f6-2c0e98939b96",
+  "appDisplayName": "Internal Order Supply App",
+  "region": "prod",
+  "environmentId": "a6b525ab-d8e2-ece8-bf60-eb9f45e74800",
+  "description": " ",
+  "buildPath": "./dist",
+  "buildEntryPoint": "index.html",
+  "localAppUrl": "http://localhost:3000",
+  "logoPath": "Default",
+  "connectionReferences": {},
+  "databaseReferences": {
+    "default.cds": {
+      "dataSources": {
+        "catalogitems": {
+          "entitySetName": "new_catalogitems",
+          "logicalName": "new_catalogitem",
+          "isHidden": false
+        },
+        "internalorders": {
+          "entitySetName": "new_internalorders",
+          "logicalName": "new_internalorder",
+          "isHidden": false
+        }
+      },
+      "environmentVariableName": ""
+    }
+  }
+}
