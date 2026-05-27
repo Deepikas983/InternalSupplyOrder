@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/OrderStatusBadge.css'
 
 export type OrderStatus = 'Submitted' | 'Approved' | 'InProgress' | 'Ordered' | 'Delivered' | 'Denied'

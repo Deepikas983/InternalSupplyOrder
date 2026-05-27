@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import type { New_internalorders } from '../generated/models/New_internalordersModel'
 import { New_internalordersService } from '../generated/services/New_internalordersService'
 import '../styles/MyOrdersPage.css'

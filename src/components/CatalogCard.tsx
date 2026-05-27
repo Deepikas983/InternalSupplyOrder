@@ -1,4 +1,3 @@
-import React from 'react'
 import type { New_catalogitems } from '../generated/models/New_catalogitemsModel'
 import '../styles/CatalogCard.css'
 

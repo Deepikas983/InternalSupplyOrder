@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import type { New_catalogitems } from '../generated/models/New_catalogitemsModel'
 import { New_catalogitemsService } from '../generated/services/New_catalogitemsService'
 import CatalogCard from '../components/CatalogCard'

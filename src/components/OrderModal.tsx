@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { New_catalogitems } from '../generated/models/New_catalogitemsModel'
 import { New_internalordersService } from '../generated/services/New_internalordersService'
 import '../styles/OrderModal.css'
