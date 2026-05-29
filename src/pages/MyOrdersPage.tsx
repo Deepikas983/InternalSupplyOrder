@@ -3,6 +3,7 @@ import type { New_internalorders } from '../generated/models/New_internalordersM
 import { New_internalordersService } from '../generated/services/New_internalordersService'
 import '../styles/MyOrdersPage.css'
 
+
 type OrdersResult = {
   success?: boolean
   data?: New_internalorders[]
@@ -33,9 +34,11 @@ const getOrderStatus = (status?: number): string => {
 
 interface MyOrdersPageProps {
   onError: (error: string) => void
+  userId?: string
+  userRole?: string
 }
 
-export default function MyOrdersPage({ onError }: MyOrdersPageProps) {
+export default function MyOrdersPage({ onError, userId, userRole }: MyOrdersPageProps) {
   const [orders, setOrders] = useState<New_internalorders[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -52,13 +55,22 @@ export default function MyOrdersPage({ onError }: MyOrdersPageProps) {
             'new_quantity',
             'new_orderdate',
             'new_neededby',
-            'new_orderstatus'
+            'new_orderstatus',
+            '_new_orderedby_value'
           ]
-        })
+        }) as OrdersResult
+        
 
         if (result && typeof result === 'object') {
           const resultObj = result as unknown as OrdersResult
-          const data = resultObj.data ?? resultObj.value ?? []
+          let data = resultObj.data ?? resultObj.value ?? []
+
+          // Filter orders by current user if userId is provided
+          if (userId) {
+            data = data.filter(order => 
+              (order as unknown as Record<string, unknown>)['_new_orderedby_value'] === userId
+            )
+          }
 
           const sortedOrders = [...data].sort((a, b) =>
             new Date(b.new_orderdate || 0).getTime() - new Date(a.new_orderdate || 0).getTime()
@@ -76,7 +88,7 @@ export default function MyOrdersPage({ onError }: MyOrdersPageProps) {
     }
 
     loadOrders()
-  }, [onError])
+  }, [onError, userId,userRole])
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return 'N/A'
@@ -100,6 +112,7 @@ export default function MyOrdersPage({ onError }: MyOrdersPageProps) {
   return (
     <div className="page-container">
       <h2 className="page-title">My Orders</h2>
+
 
       {orders.length === 0 ? (
         <div className="empty-state">

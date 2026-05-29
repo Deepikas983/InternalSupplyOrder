@@ -7,7 +7,9 @@
 export * as CommonModels from './models/CommonModels';
 export * as New_catalogitemsModel from './models/New_catalogitemsModel';
 export * as New_internalordersModel from './models/New_internalordersModel';
+export * as SystemusersModel from './models/SystemusersModel';
 
 // Services
 export * from './services/New_catalogitemsService';
 export * from './services/New_internalordersService';
+export * from './services/SystemusersService';

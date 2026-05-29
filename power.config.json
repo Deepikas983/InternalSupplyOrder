@@ -22,6 +22,11 @@
           "entitySetName": "new_internalorders",
           "logicalName": "new_internalorder",
           "isHidden": false
+        },
+        "users": {
+          "entitySetName": "systemusers",
+          "logicalName": "systemuser",
+          "isHidden": false
         }
       },
       "environmentVariableName": ""

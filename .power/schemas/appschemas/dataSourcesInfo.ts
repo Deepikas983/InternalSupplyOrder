@@ -6,16 +6,23 @@
 
 export const dataSourcesInfo = {
   "new_catalogitems": {
-    "tableId": "7d8e2229-41ce-4e03-b17b-28e7f534a98b",
-    "version": "1.0",
+    "tableId": "",
+    "version": "",
     "primaryKey": "new_catalogitemid",
     "dataSourceType": "Dataverse",
     "apis": {}
   },
   "new_internalorders": {
-    "tableId": "5c29a702-5032-48fd-a1de-0f95d7ecebf7",
-    "version": "1.0",
+    "tableId": "",
+    "version": "",
     "primaryKey": "new_internalorderid",
+    "dataSourceType": "Dataverse",
+    "apis": {}
+  },
+  "systemusers": {
+    "tableId": "",
+    "version": "",
+    "primaryKey": "systemuserid",
     "dataSourceType": "Dataverse",
     "apis": {}
   }

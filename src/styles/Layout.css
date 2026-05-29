@@ -73,6 +73,16 @@ body {
   opacity: 0.95;
 }
 
+.user-role-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .main-content {
   display: flex;
   flex: 1;

@@ -1,0 +1,40 @@
+.access-denied-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.access-denied-content {
+  text-align: center;
+  background: white;
+  padding: 60px 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+}
+
+.access-denied-icon {
+  font-size: 72px;
+  margin-bottom: 20px;
+}
+
+.access-denied-content h1 {
+  font-size: 32px;
+  color: #d83b01;
+  margin: 20px 0;
+}
+
+.access-denied-content p {
+  font-size: 16px;
+  color: #333;
+  margin: 15px 0;
+  line-height: 1.6;
+}
+
+.access-denied-help {
+  color: #666;
+  font-size: 14px;
+  margin-top: 30px;
+}
