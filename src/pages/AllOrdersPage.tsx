@@ -53,21 +53,20 @@ export default function AllOrdersPage({ onError }: AllOrdersPageProps) {
       try {
         setLoading(true)
 
-        const result = await New_internalordersService.getAll({
-          select: [
-            'new_internalorderid',
-            'new_orderid',
-            'createdon',
-            'new_orderstatus',
-            'new_itemname',
-            'new_quantity',
-            'new_neededby'
-          ]
-        }) as OrdersResult
+        const result = await New_internalordersService.getAll() as OrdersResult
 
-        if (result.success || result.value) {
+        if (result.success || result.value || result.data) {
           const orderList = result.value || result.data || []
+          console.log('All Orders API Response:', result)
+          console.log('Response keys:', Object.keys(result))
+          console.log('result.value:', result.value)
+          console.log('result.data:', result.data)
+          console.log('Order list:', orderList)
+          console.log('Order list length:', orderList.length)
           setOrders(orderList)
+        } else {
+          console.log('⚠️ Result has no success/value/data:', result)
+          console.log('⚠️ Result keys:', Object.keys(result))
         }
       } catch (err) {
         const errorMsg = err instanceof Error ? err.message : 'Failed to load orders'
@@ -147,7 +146,7 @@ export default function AllOrdersPage({ onError }: AllOrdersPageProps) {
               <th>Order ID</th>
               <th>Product</th>
               <th>Quantity</th>
-              <th>Category</th>
+              <th>Delivery Location</th>
               <th>Ordered By</th>
               <th>Status</th>
               <th>Assigned To</th>
@@ -162,11 +161,11 @@ export default function AllOrdersPage({ onError }: AllOrdersPageProps) {
             ) : (
               filteredOrders.map(order => (
                 <tr key={order.new_internalorderid}>
-                  <td>{(order as unknown as Record<string, string>)['_new_item_value@OData.Community.Display.V1.FormattedValue'] ?? '—'}</td>
-    <td>{order.new_orderid ?? 'N/A'}</td>
+                  <td>{order.new_orderid ?? 'N/A'}</td>
+                  <td>{(order as unknown as Record<string, string>)['_new_item_value@OData.Community.Display.V1.FormattedValue'] ?? order._new_item_value ?? '—'}</td>
                   <td>{order.new_quantity}</td>
-                  <td>-</td>
-                  <td>{order.owneridname}</td>
+                  <td>{order.new_deliverylocation ?? 'N/A'}</td>
+                  <td><td>{(order as unknown as Record<string, string>)['_ownerid_value@OData.Community.Display.V1.FormattedValue'] ?? order.ownerid ?? 'N/A'}</td></td>
                   <td>
                     <span
                       className="status-badge"
@@ -175,7 +174,7 @@ export default function AllOrdersPage({ onError }: AllOrdersPageProps) {
                       {getOrderStatus(order.new_orderstatus)}
                     </span>
                   </td>
-                  <td>-</td>
+                  <td><td>{(order as unknown as Record<string, string>)['_createdby_value@OData.Community.Display.V1.FormattedValue'] ?? order._createdby_value ?? 'N/A'}</td></td>
                   <td>
                     {order.createdon
                       ? new Date(order.createdon).toLocaleDateString()

@@ -33,8 +33,11 @@ export default function App() {
     const tryGetUser = () => {
       const win = window as PowerAppsWindow
       const userInfo = win.Microsoft?.PowerApps?.Pages?.readUserInfo?.()
+      console.log('🔍 tryGetUser - PowerApps available:', !!win.Microsoft?.PowerApps?.Pages?.readUserInfo)
+      console.log('🔍 tryGetUser - userInfo:', userInfo)
       const name = userInfo?.displayName || userInfo?.fullName
       if (name && userInfo?.userId) {
+        console.log('✅ Got user:', { name, userId: userInfo.userId })
         setUserDisplayName(name)
         setUserId(userInfo.userId)
         return true
@@ -48,6 +51,7 @@ export default function App() {
       let attempts = 0
       const interval = setInterval(() => {
         attempts++
+        console.log(`🔄 Retry attempt ${attempts}/20 for user info`)
         if (tryGetUser() || attempts >= 20) {
           clearInterval(interval)
         }

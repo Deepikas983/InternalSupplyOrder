@@ -47,30 +47,31 @@ export default function MyOrdersPage({ onError, userId, userRole }: MyOrdersPage
       try {
         setLoading(true)
 
-        const result = await New_internalordersService.getAll({
-          select: [
-            'new_internalorderid',
-            'new_orderid',
-            '_new_item_value',
-            'new_quantity',
-            'new_orderdate',
-            'new_neededby',
-            'new_orderstatus',
-            '_new_orderedby_value'
-          ]
-        }) as OrdersResult
+        const result = await New_internalordersService.getAll() as OrdersResult
         
 
         if (result && typeof result === 'object') {
           const resultObj = result as unknown as OrdersResult
-          let data = resultObj.data ?? resultObj.value ?? []
+          console.log('MyOrders - Full Response:', result)
+          console.log('MyOrders - Response keys:', Object.keys(result))
+          console.log('MyOrders - result.value:', resultObj.value)
+          console.log('MyOrders - result.data:', resultObj.data)
+
+          const data = resultObj.data ?? resultObj.value ?? []
+
+          console.log('Raw API Response:', result)
+          console.log('Extracted data:', data)
+          console.log('Data length:', data.length)
+          console.log('Current userId:', userId)
 
           // Filter orders by current user if userId is provided
-          if (userId) {
-            data = data.filter(order => 
-              (order as unknown as Record<string, unknown>)['_new_orderedby_value'] === userId
-            )
-          }
+          // TODO: Re-enable userId filter once userId is properly populated
+          // if (userId) {
+          //   data = data.filter(order =>
+          //     (order as unknown as Record<string, unknown>)['_new_orderedby_value'] === userId
+          //   )
+          //   console.log('Filtered by userId:', data)
+          // }
 
           const sortedOrders = [...data].sort((a, b) =>
             new Date(b.new_orderdate || 0).getTime() - new Date(a.new_orderdate || 0).getTime()
@@ -134,14 +135,14 @@ export default function MyOrdersPage({ onError, userId, userRole }: MyOrdersPage
             <tbody>
               {orders.map((order) => {
                 const status = getOrderStatus(order.new_orderstatus)
-return (
-  <tr key={order.new_internalorderid}>
-    <td>{(order as unknown as Record<string, string>)['_new_item_value@OData.Community.Display.V1.FormattedValue'] ?? '—'}</td>
-    <td>{order.new_orderid ?? 'N/A'}</td>
-    <td className="quantity">{order.new_quantity}</td>
-    <td>{formatDate(order.new_orderdate)}</td>
-    <td>{formatDate(order.new_neededby)}</td>
-    <td>
+                return (
+                  <tr key={order.new_internalorderid}>
+                    <td>{(order as unknown as Record<string, string>)['_new_item_value@OData.Community.Display.V1.FormattedValue'] ?? order._new_item_value ?? '—'}</td>
+                    <td>{order.new_orderid ?? 'N/A'}</td>
+                    <td className="quantity">{order.new_quantity}</td>
+                    <td>{formatDate(order.new_orderdate)}</td>
+                    <td>{formatDate(order.new_neededby)}</td>
+                    <td>
                       <span style={{
                         backgroundColor: statusColors[status],
                         color: 'white',
